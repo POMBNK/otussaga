@@ -1,0 +1,130 @@
+components:
+  schemas:
+    Error:
+      properties:
+        code:
+          format: int32
+          type: integer
+        message:
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    Goods:
+      example:
+        good_id: 10
+      properties:
+        good_id:
+          maxLength: 256
+          type: integer
+      required:
+      - good_id
+      type: object
+    OK:
+      properties:
+        code:
+          format: int32
+          type: integer
+        message:
+          type: string
+      required:
+      - code
+      - message
+      type: object
+    OrderResponse:
+      example:
+        goods:
+        - good_id: 10
+      properties:
+        goods:
+          items:
+            $ref: '#/components/schemas/Goods'
+          maxLength: 256
+          type: array
+      required:
+      - goods
+      type: object
+generate:
+  models: true
+info:
+  contact:
+    email: schetinnikov@gmail.com
+  description: |
+    This is simple client API
+  title: User Service
+  version: 1.0.0
+openapi: 3.0.0
+output: internal/transport/http/order/model.gen.go
+package: order
+paths:
+  /orders:
+    post:
+      description: create a new order
+      operationId: createOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                goods:
+                  example:
+                  - 1
+                  - 2
+                  - 3
+                  items:
+                    type: integer
+                  type: array
+              required:
+              - goods
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    example: 1
+                    format: int64
+                    type: integer
+          description: order created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+      summary: create order
+  /orders/{id}:
+    get:
+      description: Returns a order based on a serial id number
+      operationId: find order by order id
+      parameters:
+      - description: order id
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+          description: order response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+      tags:
+      - user
+servers:
+- url: /api/v1
+tags:
+- description: Operations about user
+  name: user

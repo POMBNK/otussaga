@@ -1,0 +1,6 @@
+package: order
+generate:
+  std-http-server: true
+  strict-server: true
+  embedded-spec: true
+output: internal/transport/http/order/server.gen.go

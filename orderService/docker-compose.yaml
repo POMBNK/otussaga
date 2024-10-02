@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  gateway:
+    build: .
+    container_name: orderService
+    hostname: orderService
+    environment:
+      - PG_URL=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@${POSTGRES_DB:-postgres}:5432/${POSTGRES_DB:-postgres}
+      - PORT=${HTTP_PORT:-8080}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:15-alpine3.20
+    environment:
+      POSTGRES_DB: "orderdb"
+      POSTGRES_USER: "pombnk"
+      POSTGRES_PASSWORD: "postgres"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./deployment/schemas:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+  rabbitmq:
+      image: rabbitmq:3.13-management
+      hostname: rabbitmq
+      restart: always
+      environment:
+        - RABBITMQ_DEFAULT_USER=rmuser
+        - RABBITMQ_DEFAULT_PASS=rmpassword
+        - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit disk_free_limit 2147483648
+      volumes:
+        - ./rabbitmq:/var/lib/rabbitmq
+      ports:
+        - 15672:15672
+        - 5672:5672
+

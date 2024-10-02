@@ -1,0 +1,1 @@
+# POC rabbit mq signals fanout

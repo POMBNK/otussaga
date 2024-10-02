@@ -1,0 +1,5 @@
+orderService/rabbitmq
+orderService/.idea
+paymentService/.idea
+warehouseService/.idea
+.idea
