@@ -1,0 +1,29 @@
+replicaCount: 1
+
+app:
+    name: orderservice
+    component: backend
+    manager: helm
+
+deployments:
+  name: orderservice
+  containerPort: 3000
+  imagePullPolicy: Always
+
+ingress:
+  name: http
+  protocol: HTTP
+  port: 82
+  extension: svc.cluster.local
+
+image:
+  repository: pombnk/orderservice
+  pullPolicy: IfNotPresent
+  tag: latest
+
+migration:
+  repository: pombnk/ordermigrations
+  pullPolicy: IfNotPresent
+  tag: latest
+
+

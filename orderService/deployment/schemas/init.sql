@@ -15,8 +15,6 @@ CREATE TABLE IF NOT EXISTS events (
 
 
 --warehouse schema
-CREATE DATABASE warehousedb;
-
 CREATE TABLE IF NOT EXISTS goods (
     id serial primary key,
     name text NOT NULL,
@@ -31,11 +29,8 @@ CREATE TABLE IF NOT EXISTS order_reservations (
 );
 
 --payment
-CREATE DATABASE paymentdb;
-
 CREATE TABLE IF NOT EXISTS payments (
     id serial primary key,
-    user_id int,
     order_id int,
     status text NOT NULL DEFAULT 'NEW' CHECK (status IN ('NEW', 'COMPLETED', 'FAILED')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

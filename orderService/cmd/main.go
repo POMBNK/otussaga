@@ -22,7 +22,7 @@ func main() {
 	dbConn, err := postgres.NewClient(ctx, postgres.Cfg{
 		Login:       "pombnk",
 		Password:    "postgres",
-		Host:        "localhost",
+		Host:        "postgres",
 		Port:        "5432",
 		Database:    "orderdb",
 		MaxAttempts: 3,

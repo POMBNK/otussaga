@@ -12,4 +12,4 @@ RUN go install github.com/pressly/goose/v3/cmd/goose@latest
 COPY --from=builder /usr/local/src/migrations /migrations
 RUN cd root/go/bin/ && mv ./goose ../../../
 
-CMD ./goose -dir migrations postgres postgres://pombnk:postgres@postgres:5432/authdb up
+CMD ./goose -dir migrations postgres postgres://pombnk:password@postgres:5432/postgres up

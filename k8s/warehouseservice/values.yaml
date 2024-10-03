@@ -1,0 +1,27 @@
+replicaCount: 1
+
+app:
+  name: warehouseservice
+  component: backend
+  manager: helm
+
+deployments:
+  name: warehouseservice
+  containerPort: 3000
+  imagePullPolicy: Always
+
+ingress:
+  name: http
+  protocol: HTTP
+  port: 82
+  extension: svc.cluster.local
+
+image:
+  repository: pombnk/warehouseservice
+  pullPolicy: IfNotPresent
+  tag: latest
+
+migration:
+  repository: pombnk/warehousemigrations
+  pullPolicy: IfNotPresent
+  tag: latest

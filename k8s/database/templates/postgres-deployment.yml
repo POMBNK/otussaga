@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: pombnk/sagadb:latest
+          imagePullPolicy: "IfNotPresent"
+          env:
+            - name: POSTGRES_DB
+              value: postgres
+            - name: POSTGRES_USER
+              value: pombnk
+            - name: POSTGRES_PASSWORD
+              value: postgres
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:
+            # mountPath within the container
+            - name: postgres-pvc
+              mountPath: "/var/lib/postgresql/data/"
+      volumes:
+        # mapped to the PVC
+        - name: postgres-pvc
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+
+
+
+{{/*      initContainers:*/}}
+{{/*        - name: init-orderdb*/}}
+{{/*          image: postgres:16.3-alpine3.20*/}}
+{{/*          command: [ 'sh', '-c',*/}}
+{{/*            'psql -h postgres -U admin -c "CREATE DATABASE orderdb;"' ]*/}}
+{{/*        - name: init-warehousedb*/}}
+{{/*          image: postgres:16.3-alpine3.20*/}}
+{{/*          command: [ 'sh', '-c',*/}}
+{{/*            'psql -h postgres -U admin -c "CREATE DATABASE warehousedb;"' ]*/}}
+{{/*        - name: init-paymentdb*/}}
+{{/*          image: postgres:16.3-alpine3.20*/}}
+{{/*          command: [ 'sh', '-c',*/}}
+{{/*            'psql -h postgres -U admin -c "CREATE DATABASE paymentdb;"' ]*/}}
