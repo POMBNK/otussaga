@@ -1,0 +1,5 @@
+FROM rabbitmq:3.13-management
+
+ENV RABBITMQ_DEFAULT_USER=rmuser
+ENV RABBITMQ_DEFAULT_PASS=rmpassword
+ENV RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS="-rabbit disk_free_limit 2147483648"

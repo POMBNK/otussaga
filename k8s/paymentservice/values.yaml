@@ -7,7 +7,7 @@ app:
 
 deployments:
   name: paymentservice
-  containerPort: 3000
+  containerPort: 3001
   imagePullPolicy: Always
 
 ingress:

@@ -35,7 +35,7 @@ func main() {
 		MaxAttempts:      3,
 		User:             "rmuser",
 		Password:         "rmpassword",
-		Host:             "localhost",
+		Host:             "definition",
 		Port:             "5672",
 		Vhost:            "/",
 		ExchangeSettigns: mq.DefaultExchangeSettings("orders", "fanout"),

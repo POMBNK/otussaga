@@ -1,0 +1,11 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: definition
+spec:
+  rabbitmq:
+    additionalConfig: |
+      default_user=rmuser
+      default_pass=rmpassword
+  service:
+    type: LoadBalancer

@@ -7,7 +7,7 @@ app:
 
 deployments:
   name: warehouseservice
-  containerPort: 3000
+  containerPort: 3002
   imagePullPolicy: Always
 
 ingress:

@@ -1,5 +1,5 @@
 # Pulling the official postgres base image
-FROM postgres:16.3-alpine3.20
+FROM postgres:17.0-alpine3.20
 
 # Argument pathtoservice
 ARG PATHTOSERVICE=./schema

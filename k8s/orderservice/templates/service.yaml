@@ -9,6 +9,6 @@ spec:
     app.kubernetes.io/managed-by: {{.Values.app.manager}}
   ports:
     - protocol: TCP
-      port: 82
-      targetPort: 8082
+      port: 80
+      targetPort: 8080
   type: ClusterIP

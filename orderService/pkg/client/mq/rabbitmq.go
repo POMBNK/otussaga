@@ -31,6 +31,7 @@ func NewRabbitMQ(ctx context.Context, cfg Cfg) (*RabbitMQ, error) {
 		var err error
 		conn, err = amqp.Dial(rabbitURL)
 		if err != nil {
+			log.Println(err)
 			return fmt.Errorf("amqp.Dial %w", err)
 		}
 
