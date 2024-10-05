@@ -35,8 +35,8 @@ minikube dashboard
 
 Пример логов ![img.png](imgs/img.png) ![img.png](imgs/img0.png) ![img_1.png](imgs/img_1.png)
 
-В данном примере товар с order_id = 4 был провален, значит все сервисы должны быть выполнить компенсирующие действия для отката. 
-Проверим состояние в базе, так как обработчики реализовывалось только для очередей, без привычного rest api
+В данном примере товар с order_id = 4 был провален, значит все сервисы должны выполнить компенсирующие действия для отката. 
+Проверим состояние в базе, так как обработчики реализовывались только для очередей, без привычного rest api
 
 ```shell
 kubectl get pods
@@ -48,16 +48,17 @@ kubectl port-forward --namespace default postgres-746bdbf855-crkpg 5432:5432
 
 ```
 
-Любым удобным способ подключаемся по кредам
-POSTGRES_DB postgres
-POSTGRES_USER pombnk
-POSTGRES_PASSWORD postgres
-
+Любым удобным способом подключаемся по кредам
+```
+POSTGRES_DB=postgres
+POSTGRES_USER=pombnk
+POSTGRES_PASSWORD=postgres
+```
 Результат 
 
 ![img_3.png](imgs/img_3.png)
 
-4. По окончанию работы, очистить helm list + джобы
+7. По окончанию работы, очистить helm list + джобы
 ```shell
 make stop
 ```
